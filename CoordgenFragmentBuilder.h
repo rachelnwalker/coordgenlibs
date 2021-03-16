@@ -57,10 +57,7 @@ class EXPORT_COORDGEN CoordgenFragmentBuilder
      set a flag that forces the macrocycle builder to skip expensive polyomino
      matching routines and go straight to the breaking a bond approach
      */
-    void setForceOpenMacrocycles(bool b)
-    {
-        m_macrocycleBuilder.m_forceOpenMacrocycles = b;
-    }
+    void setForceOpenMacrocycles(bool b) { m_macrocycleBuilder.setForceOpenMacrocycles(b); }
 
     /* set precision of the calculations. Higher precisions settings result
      better
@@ -69,10 +66,10 @@ class EXPORT_COORDGEN CoordgenFragmentBuilder
     void setPrecision(float f) { m_macrocycleBuilder.setPrecision(f); }
 
     /*
-     all bonds are placed at even intervals around the atom, as opposed for
-     instance to the 90°-90°-120°-60° around tetracoordinated centers
+     determine whether all bonds are placed at even intervals around the atom,
+     as opposed for instance to the 90°-90°-120°-60° around tetracoordinated centers
      */
-    bool m_evenAngles;
+    void setEvenAngles(bool b) { m_evenAngles = b; }
 
   private:
     /*
@@ -193,6 +190,12 @@ class EXPORT_COORDGEN CoordgenFragmentBuilder
 
     /* the macrocycle builder */
     CoordgenMacrocycleBuilder m_macrocycleBuilder;
+
+    /*
+     all bonds are placed at even intervals around the atom, as opposed for
+     instance to the 90°-90°-120°-60° around tetracoordinated centers
+     */
+    bool m_evenAngles;
 };
 
 #endif /* defined(COORDGEN_FRAGMENT_BUILDER_H) */

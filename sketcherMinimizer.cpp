@@ -45,8 +45,8 @@ const int MAX_NUMBER_OF_RINGS = 40;
 
 sketcherMinimizer::sketcherMinimizer(float precision)
 {
-    m_fragmentBuilder.m_evenAngles = false;
-    m_minimizer.m_evenAngles = false;
+    m_fragmentBuilder.setEvenAngles(false);
+    m_minimizer.setEvenAngles(false);
     m_minimizer.setPrecision(precision);
     m_fragmentBuilder.setPrecision(precision);
 }
@@ -58,7 +58,7 @@ sketcherMinimizer::~sketcherMinimizer()
 
 void sketcherMinimizer::setScoreResidueInteractions(bool b)
 {
-    m_minimizer.m_scoreResidueInteractions = b;
+    m_minimizer.setScoreResidueInteractions(b);
 }
 
 void sketcherMinimizer::canonicalOrdering(sketcherMinimizerMolecule* minMol)
@@ -269,11 +269,11 @@ void sketcherMinimizer::initialize(
 
     flagCrossAtoms();
 
-    m_minimizer._atoms = _atoms;
-    m_minimizer._bonds = _bonds;
-    m_minimizer._molecules = _molecules;
-    m_minimizer._residues = _residues;
-    m_minimizer._residueInteractions = _residueInteractions;
+    m_minimizer.setAtoms(_atoms);
+    m_minimizer.setBonds(_bonds);
+    m_minimizer.setMolecules(_molecules);
+    m_minimizer.setResidues(_residues);
+    m_minimizer.setResidueInteractions(_residueInteractions);
 }
 
 bool sketcherMinimizer::structurePassSanityCheck() const
@@ -1021,7 +1021,7 @@ void sketcherMinimizer::findFragments()
         _independentFragments.push_back(mol->getMainFragment());
     }
 
-    m_minimizer._fragments = _fragments;
+    m_minimizer.setFragments(_fragments);
 
     initializeFragments();
 }
@@ -1109,8 +1109,8 @@ sketcherMinimizer::computeChainsStartingPositionsMetaMol(
 
     sketcherMinimizer min;
     if (metaMol->_atoms.size()) {
-        min.m_fragmentBuilder.m_evenAngles = true;
-        min.m_minimizer.m_evenAngles = true;
+        min.m_fragmentBuilder.setEvenAngles(true);
+        min.m_minimizer.setEvenAngles(true);
 
         min.initialize(metaMol);
         min.findFragments();
@@ -2237,8 +2237,8 @@ void sketcherMinimizer::placeMoleculesWithProximityRelations(
     sketcherMinimizer min(m_minimizer.getPrecision());
 
     if (metaMol->_atoms.size()) {
-        min.m_fragmentBuilder.m_evenAngles = true;
-        min.m_minimizer.m_evenAngles = true;
+        min.m_fragmentBuilder.setEvenAngles(true);
+        min.m_minimizer.setEvenAngles(true);
 
         min.initialize(metaMol);
         min.findFragments();

@@ -301,7 +301,7 @@ class EXPORT_COORDGEN CoordgenMacrocycleBuilder
 
     /* Skip the polyomino approach and fall back to opening the macrocycle when
      * generating coordinates */
-    bool m_forceOpenMacrocycles = false;
+    void setForceOpenMacrocycles(bool b) { m_forceOpenMacrocycles = b; }
 
     float getPrecision() const;
 
@@ -313,6 +313,10 @@ class EXPORT_COORDGEN CoordgenMacrocycleBuilder
      calculation times
      */
     float m_precision;
+
+    /* Skip the polyomino approach and fall back to opening the macrocycle when
+     * generating coordinates */
+    bool m_forceOpenMacrocycles = false;
 
     /* build polyominos with the given number of vertices */
     std::vector<Polyomino> buildSquaredShapes(int totVertices) const;

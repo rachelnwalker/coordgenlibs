@@ -319,16 +319,20 @@ class EXPORT_COORDGEN CoordgenMinimizer
     void addExtraInteraction(sketcherMinimizerMolecule* molecule,
                              sketcherMinimizerInteraction* interaction);
 
-    std::vector<sketcherMinimizerAtom*> _atoms;
-    std::vector<sketcherMinimizerBond*> _bonds;
-    bool m_evenAngles;
-    std::vector<sketcherMinimizerResidue*> _residues;
-    std::vector<sketcherMinimizerResidueInteraction*> _residueInteractions;
-    std::vector<sketcherMinimizerFragment*> _fragments;
-    std::vector<sketcherMinimizerMolecule*> _molecules;
+    // setters for private fields
+    void setAtoms(std::vector<sketcherMinimizerAtom*> atoms) { _atoms = atoms; }
+    void setBonds(std::vector<sketcherMinimizerBond*> bonds) { _bonds = bonds; }
+    void setResidues(std::vector<sketcherMinimizerResidue*> residues) { _residues = residues; }
+    void setResidueInteractions(std::vector<sketcherMinimizerResidueInteraction*> residueInteractions) { _residueInteractions = residueInteractions; }
+    void setFragments(std::vector<sketcherMinimizerFragment*> fragments) { _fragments = fragments; }
+    void setMolecules(std::vector<sketcherMinimizerMolecule*> molecules) { _molecules = molecules; }
 
-    bool skipMinimization, skipAvoidClashes, skipFlipFragments,
-        m_scoreResidueInteractions;
+    void setEvenAngles(bool b) { m_evenAngles = b; }
+    void setSkipMinimization(bool b) { skipMinimization = b; }
+    void setSkipAvoidClashes(bool b) { skipAvoidClashes = b; }
+    void setSkipFlipFragments(bool b) { skipFlipFragments = b; }
+    void setScoreResidueInteractions(bool b) { m_scoreResidueInteractions = b; }
+
 
     std::vector<sketcherMinimizerStretchInteraction*> getStretchInteractions() {return _stretchInteractions;};
     std::vector<sketcherMinimizerInteraction*> getInteractions() {return _interactions;};
@@ -394,6 +398,17 @@ private:
 
     float m_maxIterations;
     float m_precision;
+
+    bool m_evenAngles;
+    bool skipMinimization, skipAvoidClashes, skipFlipFragments,
+        m_scoreResidueInteractions;
+
+    std::vector<sketcherMinimizerAtom*> _atoms;
+    std::vector<sketcherMinimizerBond*> _bonds;
+    std::vector<sketcherMinimizerResidue*> _residues;
+    std::vector<sketcherMinimizerResidueInteraction*> _residueInteractions;
+    std::vector<sketcherMinimizerFragment*> _fragments;
+    std::vector<sketcherMinimizerMolecule*> _molecules;
 };
 
 #endif /* defined(COORDGEN_MINIMIZER_H) */

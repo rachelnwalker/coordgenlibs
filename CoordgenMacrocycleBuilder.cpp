@@ -761,7 +761,7 @@ bool CoordgenMacrocycleBuilder::openCycleAndGenerateCoords(
 {
     map<sketcherMinimizerAtom*, sketcherMinimizerAtom*> atomMap;
     sketcherMinimizer min(getPrecision());
-    min.m_minimizer.skipMinimization = true;
+    min.m_minimizer.setSkipMinimization(true);
     min.m_fragmentBuilder.setForceOpenMacrocycles(true);
     auto* minMol = new sketcherMinimizerMolecule;
     sketcherMinimizerBond* bondToBreak = findBondToOpen(ring);
